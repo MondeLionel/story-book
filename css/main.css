@@ -1,6 +1,17 @@
 body{
   background-color: black;
   overflow-x: hidden;
+  position: relative;
+}
+
+.loader{height: 100vh;width: 100%;position: absolute;z-index: 100;top: 0;left: 0;display: flex;background-color: darksalmon;justify-content: center;align-items: center;transform: translateX(100%);}
+.loading .loader{
+  transform:translateX(0);
+  transition:transform 0.5s ease;
+}
+.loading .loader h1{
+  font-size:5vw;
+  font-weight:bolder;
 }
 .action--scene{
   height:93vh;

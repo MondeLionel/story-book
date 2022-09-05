@@ -1,6 +1,12 @@
 
 // GLOBAL JS
 
+const body = $('body');
+console.log(body)
+
+
+
+
 // class based nav
 
 $('.nav-item').on('click',function() {
@@ -13,21 +19,6 @@ $('.feed-links a').on('click', function(){
 		$(this).addClass('active');
 	$(this).siblings().removeClass('active')
 })
-
-let body = $('body');
-
-	// $(window).load(function(){
-	// 		$("body").removeClass("loading");
-	// 		setTimeout(function(){
-	// 			$(".loader").addClass("loader-out");
-	// 			$("#feed").addClass("render")
-	// 		}, 1000)
-	// 		setTimeout(function(){
-	// 			$(".loader").addClass("d-none");
-
-	// 		}, 3000)
-			
-	// })
 
 
 
@@ -48,9 +39,7 @@ if (connection){
 	if(connection.downlink >= 1 || connection.effectiveType === '3g' || connection.effectiveType === '4g' ){
 		let preloadVideo = true;
 		console.log("preload as many videos as you can")
-
 	}
-
 }
 
 
@@ -85,6 +74,7 @@ firstVid.addEventListener('loadedmetadata', function(){
 }
 
 
+// let check if all the videos are loaded. Create a function 
 
 var actionSwiper = new Swiper('.swiper-container.action', {
 	direction: 'horizontal',
@@ -94,11 +84,6 @@ var actionSwiper = new Swiper('.swiper-container.action', {
 
 })
 
-
-// let playVideo = function(){
-// 	$("#video-1").trigger("play")
-// 	console.log("clicked play")
-// }
 
 $('#play-button').on('click',function(){
 	$("#video-1").trigger("play")
@@ -123,18 +108,21 @@ if(body.hasClass("autoplay") === true){
 actionSwiper.on('slideChange', autoPlayVideo)
 }
 
-	// $(".post-overlay").on('click', function(){
-	// 	if( $(this).siblings().find('video').paused === true)
-	// 		// console.log($(".post-overlay").siblings().find('video').paused)
-	// 	console.log("clicked post")
-	// 	// $(this).siblings().find('video').trigger('play');
-	// })
 
+const _checkVideoLoaded = function(){
+	const videos = document.querySelectorAll("video")
+	const body = document.querySelector("body")
 
+	videos.forEach(function(video,index){
+		video.onloadedmetadata = function(){
+			console.log(`video ${index} is ready`)
+		}
+	})
 
+	body.classList.remove("loading")
+}
 
-
-
+window.addEventListener("load", _checkVideoLoaded)
 
 
 
